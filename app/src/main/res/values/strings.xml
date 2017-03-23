@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="search_title">Find Jobs:</string>
+    <string name="results_title">Search Results</string>
+    <string name="favorites_title">My Jobs</string>
+    <string name="companies_title">Companies</string>
+    <string name="contacts_title">People</string>
+    <string name="tasks_title">Tasks</string>
+    <string name="tips_title">Tips</string>
+    <string name="cities_title">Locations</string>
+    <string name="details_title">Details</string>
+    <string name="recent_searches">Recent Searches</string>
+
+    <string name="app_name">JobAgent</string>
+    <string name="lbl_date">Date</string>
+    <string name="lbl_status">Status</string>
+    <string name="lbl_terms">Terms</string>
+    
+    <string name="btn_search">Search</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_share">Share</string>
+    <string name="btn_apply">Apply</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_glassdoor">Glassdoor</string>
+    <string name="btn_linkedin">LinkedIn</string>
+    <string name="btn_connect">Connect</string>
+    
+    <string name="confirm_delete">Delete this item?</string>
+    <string name="confirm_ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
+    <string name="hint_search">Keyword or company</string>
+    <string name="hint_name">name</string>
+    <string name="hint_title">title</string>
+	<string name="hint_company">company</string>
+	<string name="hint_contact">person</string>
+	<string name="hint_job">job</string>
+	<string name="hint_description">notes</string>
+	<string name="hint_url">url</string>
+	<string name="hint_location">City or postal code</string>
+	<string name="hint_phone">phone</string>
+	<string name="hint_email">email</string>
+	<string name="hint_date">mm/dd/yy</string>
+	<string name="hint_status">status</string>
+	<string name="hint_priority">priority</string>
+	<string name="hint_pay">pay rate</string>
+	<string name="hint_type">type</string>
+		
+	<string name="radio_pt">PT</string>
+	<string name="radio_ft">FT</string>
+	<string name="radio_w2">W2</string>
+	<string name="radio_1099">1099</string>
+					
+    <!--  Messages -->					
+    <string name="location_not_enabled">Location not enabled</string>
+    <string name="open_location_settings">open_location_settings?</string>
+    
+    
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linearLayout"
+            android:layout_alignParentTop="false">
+
+        <EditText
+            android:id="@+id/companyName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_company"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/companyDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_description"
+            android:inputType="textMultiLine"
+            android:minLines="2" />
+
+        <RadioGroup
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="163dp"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/defaultType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Default" />
+
+            <RadioButton
+                android:id="@+id/agency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Agency" />
+
+            <RadioButton
+                android:id="@+id/government"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Govt" />
+
+            <RadioButton
+                android:id="@+id/training"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Training" />
+            </RadioGroup>
+            
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:gravity="center" >
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_save"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_delete" />
+
+            <Button
+                android:id="@+id/glassdoor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_glassdoor"
+            	android:onClick="itemBtnClicked" />
+            
+            <Button
+                android:id="@+id/linkedin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_linkedin" />
+            
+    </LinearLayout>
+
+
+</RelativeLayout>

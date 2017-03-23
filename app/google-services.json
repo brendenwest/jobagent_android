@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "487047384811",
+    "firebase_url": "https://orbital-cistern-594.firebaseio.com",
+    "project_id": "orbital-cistern-594",
+    "storage_bucket": "orbital-cistern-594.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487047384811:android:31572834962693c8",
+        "android_client_info": {
+          "package_name": "com.brisksoft.jobagent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487047384811-huf1nc1uii72fhsgn67eoa0ruuptl18l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAY23Ra-JhRBVQFDyCYNSjjs-6tB9KWfE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

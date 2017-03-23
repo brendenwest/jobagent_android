@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_title"
+            android:inputType="text"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:id="@+id/company"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_company"
+            android:inputType="text"
+            android:paddingTop="5dp" />
+
+        <EditText
+            android:id="@+id/location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_location"
+            android:inputType="text" 
+            android:paddingTop="5dp"/>
+
+        <EditText
+            android:id="@+id/contact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_contact"
+            android:inputType="text" 
+            android:paddingTop="5dp"/>
+        
+      <LinearLayout 
+	    	android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="10dp">
+
+    	<TextView
+            android:id="@+id/lblTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:text="@string/lbl_terms"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+           <Spinner
+               android:id="@+id/spinnerType"
+               android:layout_width="150dp"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="5dp"
+               android:prompt="@string/hint_type" />
+
+        <EditText
+            android:id="@+id/pay"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_pay"
+            android:inputType="text" 
+            android:paddingTop="5dp"/>
+
+  	</LinearLayout> 
+        
+        
+	<LinearLayout 
+	    	android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:paddingLeft="10dp">
+
+	    	<TextView
+	            android:id="@+id/lblStatus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_vertical"
+	            android:layout_marginRight="10dp"
+	            android:text="@string/lbl_status"
+	            android:textAppearance="?android:attr/textAppearanceSmall" />
+	    
+            <Spinner
+                android:id="@+id/spinnerStatus"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:prompt="@string/hint_status" />
+                        
+
+	        <EditText
+	            android:id="@+id/itemDate"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="5dp"
+	            android:ems="10"
+	            android:inputType="date"
+	            android:hint="@string/hint_date"
+	            android:onClick="showDatePickerDialog" />
+
+	    </LinearLayout>
+
+		<EditText
+		    android:id="@+id/description"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:ems="10"
+		    android:hint="@string/hint_description"
+		    android:inputType="textMultiLine"
+		    android:minLines="4" />
+
+        <EditText
+            android:id="@+id/link"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hint_url"
+            android:inputType="textUri" 
+            android:paddingTop="5dp"/>
+        
+		<LinearLayout
+	        android:layout_width="match_parent"
+ 	        android:layout_height="0dip"
+    	    android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center|bottom"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_save" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_delete" />
+
+            <Button
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_share" />
+
+            <Button
+                android:id="@+id/apply"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+	            android:layout_marginLeft="20dp"
+                android:onClick="itemBtnClicked"
+                android:text="@string/btn_apply" />
+		</LinearLayout>    
+ </LinearLayout>
+ </ScrollView>
