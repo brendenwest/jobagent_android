@@ -3,9 +3,9 @@
 
     <string name="search_title">Find Jobs:</string>
     <string name="results_title">Search Results</string>
-    <string name="favorites_title">My Jobs</string>
+    <string name="favorites_title">Jobs</string>
     <string name="companies_title">Companies</string>
-    <string name="contacts_title">People</string>
+    <string name="contacts_title">Contacts</string>
     <string name="tasks_title">Tasks</string>
     <string name="tips_title">Tips</string>
     <string name="cities_title">Locations</string>
@@ -55,6 +55,5 @@
     <!--  Messages -->					
     <string name="location_not_enabled">Location not enabled</string>
     <string name="open_location_settings">open_location_settings?</string>
-    
-    
+
 </resources>

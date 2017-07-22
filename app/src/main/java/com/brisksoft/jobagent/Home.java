@@ -51,6 +51,7 @@ public class Home extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         jobAgent = ((JobAgent) this.getApplication());
 		locationHelper = new LocationHelper(this);
         sharedPref = getPreferences(Context.MODE_PRIVATE);

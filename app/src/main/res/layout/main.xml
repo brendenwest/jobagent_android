@@ -71,7 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/searchBtn"
-        android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView">
 
         <LinearLayout

@@ -1,13 +1,13 @@
 package com.brisksoft.jobagent;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.brisksoft.jobagent.Classes.ActivityHelper;
 
 import android.app.ActionBar;
@@ -17,9 +17,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,17 +30,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 public class Tips extends ListActivity {
     /** Called when the activity is first created. */
 
+    ListView listView;
+    ListAdapter listAdapter;
 	private List<String[]> tips = new ArrayList<String[]>();
-	private static final String tipsUrl = "http://brisksoft.us/jobagent/tips.json";
+	private static final String tipsUrl = "http://brisksoft.us/jobagent/tips2.json";
 	private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_2_line);
+        setContentView(R.layout.list);
         
         final String TAG = getString(R.string.tips_title);
 
@@ -53,12 +56,16 @@ public class Tips extends ListActivity {
             actionBar.setTitle(TAG);
         }
 
+        listView = (ListView) findViewById(android.R.id.list);
+        listAdapter = new ListAdapter(this, tips);
+        listView.setAdapter(listAdapter);
+
         ConnectivityManager connMgr = (ConnectivityManager) 
                 getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             if (networkInfo != null && networkInfo.isConnected()) {
                 // fetch data
-                new LoadListTask().execute(tipsUrl);
+                loadList(tipsUrl);
             } else {
                 // display error
             	Log.d("search results", "network error");
@@ -66,24 +73,53 @@ public class Tips extends ListActivity {
 
 
             // set on-click task for list items
-        	ListView list = getListView();
-        	list.setOnItemClickListener(new OnItemClickListener()
+        listView.setOnItemClickListener(new OnItemClickListener()
             {
             public void onItemClick( AdapterView<?> arg0, View view, int position, long id)
                 {
             		// pass selected task item to detail view
-                    Log.d(TAG, "tip " + position);
-                    if (tips.get(position)[2] != null && !tips.get(position)[2].isEmpty()) {
-                    	// link to web page
-                    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position)[2]));
-                    	startActivity(browserIntent);
-                    }
+                Log.d(TAG, "tip " + position);
+                if (tips.get(position)[2] != null && !tips.get(position)[2].isEmpty()) {
+                    // link to web page
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position)[2]));
+                    startActivity(browserIntent);
+                }
 
                 }
             } );
         
         	// log screen view
         	((JobAgent) this.getApplication()).trackPV(TAG);
+     }
+
+     private void loadList(String url) {
+         RequestQueue queue = Volley.newRequestQueue(this);
+         JsonArrayRequest jsonReq = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+             @Override
+             public void onResponse(JSONArray response) {
+Log.d("JSON","loaded " + response.length());
+                 try {
+                     for(int i = 0; i < response.length(); i++){
+                         String[] item = new String[3];
+                         item[0] = response.getJSONObject(i).getString("title");
+                         item[1] = response.getJSONObject(i).getString("description");
+                         item[2] = response.getJSONObject(i).getString("link");
+                         tips.add(item);
+                     }
+                     // trigger refresh of recycler view
+                     listAdapter.notifyDataSetChanged();
+                 } catch (JSONException e) {
+                 }
+             }
+         }, new Response.ErrorListener() {
+             @Override
+             public void onErrorResponse(VolleyError error) {
+                 Log.d("JSON", "Error: " + error.getMessage());
+             }
+
+         });
+         // Add the request to the RequestQueue.
+         queue.add(jsonReq);
      }
 
     @Override
@@ -96,138 +132,36 @@ public class Tips extends ListActivity {
 		  return helper.onOptionsItemSelected(item);
 	}
 
-    
- // Implementation of AsyncTask used to download XML feed 
-    private class LoadListTask extends AsyncTask<String, Void, List<String[]>> {
-    	
-        @Override
-        protected List<String[]> doInBackground(String... jsonData) {
-            
-            try{
-                /** Getting the parsed data as a List construct */
-            	InputStream source = downloadUrl(tipsUrl);
-
-        	   	tips = readJsonStream(source);                
- 	     	   
-            }catch(Exception e){
-                Log.d("Exception",e.toString());
-            }
-  
-            return tips;
-        }
-        
-        @Override
-        protected void onPostExecute(List<String[]> tips) {
-        	setTipsView(tips);
-
-        }
-    }
-
-    private void setTipsView(List<String[]> tips) {
-        TipsListAdapter listAdapter = new TipsListAdapter(this, tips);
-        setListAdapter(listAdapter);    	
-    }
-    
-    // classes to parse JSON response
-    List<String[]> readJsonStream(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        reader.setLenient(true);
-        try {
-          return readTipsArray(reader);
-        }
-         finally {
-          reader.close();
-        }
-      }
-
-      List<String[]> readTipsArray(JsonReader reader) throws IOException {
-
- 	   	reader.beginObject();
- 	   	reader.skipValue(); // skip the root name
-        while (reader.hasNext()) {
-            reader.beginArray();
-            while (reader.hasNext()) {
- 	            	tips.add(readTip(reader));
-            }
-           reader.endArray();
-        }
-        reader.endObject();
-        return tips;
-      }
-
-      String[] readTip(JsonReader reader) throws IOException {
-    	 String[] tip = new String[3];
-        
-        reader.beginObject();
-        while (reader.hasNext()) {
-          String name = reader.nextName();
-          if (name.equals("title")) {
-        	  tip[0] = reader.nextString();
-          } else if (name.equals("description")) {
-        	  tip[1] = reader.nextString();
-          } else if (name.equals("link")) {
-        	  tip[2] = reader.nextString();
-          } else {
-            reader.skipValue();
-          }
-        }
-        reader.endObject();
-        return tip;
-      }
-
-    // Given a string representation of a URL, sets up a connection and gets
-    // an input stream.
-    private InputStream downloadUrl(String urlString) throws IOException {
-        URL url = new URL(urlString);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds */);
-        conn.setRequestMethod("GET");
-        conn.setDoInput(true);
-        // Starts the query
-        conn.connect();
-        return conn.getInputStream();
-    }
-
-    public class TipsListAdapter extends ArrayAdapter<String[]> {
+    private class ListAdapter extends ArrayAdapter<String[]> {
         private final List<String[]> tips;
         private final Context context;
 
-        private TipsListAdapter(Context context, List<String[]> tips) {
-            super(context, R.layout.list_item_2_line, tips);
+        private ListAdapter(Context context, List<String[]> tips) {
+            super(context,0, tips);
             this.context = context;
             this.tips = tips;
         }
 
         private class ViewHolder{
             private TextView item1;
-            private TextView item2;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            ViewHolder holder;
-            if (v == null) {
+
+            if (convertView == null) {
                 LayoutInflater vi =
                         (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.list_item_2_line, parent);
-                holder = new ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.text1);
-                holder.item2 = (TextView) v.findViewById(R.id.text2);
-                v.setTag(holder);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
             }
-            else
-                holder=(ViewHolder)v.getTag();
 
+            TextView title = (TextView) convertView.findViewById(R.id.item_title);
             final String[] tip = tips.get(position);
             if (tip != null) {
-                holder.item1.setText(tip[0]);
-                holder.item2.setText(tip[1]);
+                title.setText(tip[0]);
             }
-            return v;
+            return convertView;
         }
-
     }
 
 }

@@ -26,7 +26,7 @@ public class Favorites extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_2_line);
+        setContentView(R.layout.list);
         String TAG = getString(R.string.favorites_title);
 
         // configure action bar

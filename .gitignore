@@ -1,0 +1,18 @@
+# ignore following files
+app/app-release.apk
+app/src/main/assets/airshipconfig.properties
+app/libs/urbanairship-lib-4.0.2.jar
+android-release-key.keystore
+import-summary.txt
+*.iml
+
+
+# ignore following directories
+build/
+gradle/
+.gradle/
+.idea/
+/local.properties
+.DS_Store
+/captures
+.externalNativeBuild

@@ -37,7 +37,7 @@ public class CompanyListAdapter extends ArrayAdapter {
                     (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.list_item, null);
             holder = new ViewHolder();
-            holder.item1 = (TextView) v.findViewById(R.id.text1);
+            holder.item1 = (TextView) v.findViewById(R.id.item_title);
             v.setTag(holder);
         }
         else

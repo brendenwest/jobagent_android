@@ -30,7 +30,7 @@ public class Contacts extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_2_line);
+        setContentView(R.layout.list);
 
         String TAG = getString(R.string.contacts_title);
 
@@ -137,8 +137,8 @@ public class Contacts extends ListActivity {
                         (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.list_item_2_line, null);
                 holder = new ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.text1);
-                holder.item2 = (TextView) v.findViewById(R.id.text2);
+                holder.item1 = (TextView) v.findViewById(R.id.item_title);
+                holder.item2 = (TextView) v.findViewById(R.id.item_subtitle);
                 v.setTag(holder);
             }
             else

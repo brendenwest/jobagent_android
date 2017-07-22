@@ -24,7 +24,7 @@ public class Cities extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_2_line);
+        setContentView(R.layout.list);
 
         final String TAG = getString(R.string.cities_title);
 
@@ -89,7 +89,7 @@ public class Cities extends ListActivity {
                         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.list_item, null);
                 holder = new ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.text1);
+                holder.item1 = (TextView) v.findViewById(R.id.item_title);
                 v.setTag(holder);
             } else
                 holder = (ViewHolder) v.getTag();

@@ -148,8 +148,8 @@ public class SearchResults extends AppCompatActivity implements TabLayout.OnTabS
                         (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 v = vi.inflate(R.layout.list_item_2_line, null);
                 holder = new SearchResults.ResultsAdapter.ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.text1);
-                holder.item2 = (TextView) v.findViewById(R.id.text2);
+                holder.item1 = (TextView) v.findViewById(R.id.item_title);
+                holder.item2 = (TextView) v.findViewById(R.id.item_subtitle);
                 v.setTag(holder);
             }
             else
