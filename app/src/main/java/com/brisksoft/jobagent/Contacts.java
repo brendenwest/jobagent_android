@@ -38,7 +38,7 @@ public class Contacts extends BaseActivity {
 
         final List<Contact> contactList = datasource.getAllContacts();
 
-        listAdapter = new ListAdapter(this, contactList);
+        listAdapter = new ListAdapter<>(this, contactList);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
 

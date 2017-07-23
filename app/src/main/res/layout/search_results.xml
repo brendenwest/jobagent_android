@@ -21,12 +21,11 @@
         />
 
     <ListView
-        android:id="@+id/siteListing"
-        android:layout_width="fill_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.71"
-        tools:listitem="@android:layout/simple_list_item_2"
-        android:layout_marginStart="10dp">
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_weight="0.71">
     </ListView>
 
 </LinearLayout>

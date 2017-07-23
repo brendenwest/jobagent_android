@@ -41,7 +41,7 @@ public class Companies extends BaseActivity {
     	
         // use the CustomAdapter to map elements to a ListView
         ListView listView = (ListView) findViewById(R.id.listView);
-        listAdapter = new ListAdapter(this, companyList);
+        listAdapter = new ListAdapter<>(this, companyList);
         listView.setAdapter(listAdapter);
 
         // set on-click event for list items

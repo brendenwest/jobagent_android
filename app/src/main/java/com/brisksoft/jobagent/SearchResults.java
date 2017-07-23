@@ -7,20 +7,15 @@ package com.brisksoft.jobagent;
 import com.brisksoft.jobagent.Classes.Job;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v7.app.ActionBar;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import android.widget.TextView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.brisksoft.jobagent.Classes.ListAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
@@ -41,15 +37,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-public class SearchResults extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+public class SearchResults extends BaseActivity implements TabLayout.OnTabSelectedListener {
     TabLayout tabLayout;
-    ListView listView ;
 
     private List<Job> listings;
     private ProgressDialog progress;
-
-    private static String SEARCH_API = "http://brisksoft.herokuapp.com/getjobs?location=<location>&kw=<kw>&v=1&country=<country>&max=50";
-
     private RequestQueue requestQueue;
     private Gson gson;
 
@@ -61,9 +53,11 @@ public class SearchResults extends AppCompatActivity implements TabLayout.OnTabS
 
         String TAG = getString(R.string.results_title);
 
-        // configure action bar
-        ActionBar actionBar = getSupportActionBar();
-        getSupportActionBar().setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         listings = new ArrayList<Job>();
         requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -124,48 +118,6 @@ public class SearchResults extends AppCompatActivity implements TabLayout.OnTabS
 
     }
 
-    private class ResultsAdapter extends ArrayAdapter<Job> {
-        private final List<Job> jobList;
-        private final Context context;
-
-        public ResultsAdapter(Context context, List<Job> jobList) {
-            super(context, R.layout.list_item_2_line, jobList);
-            this.context = context;
-            this.jobList = jobList;
-        }
-
-        public class ViewHolder{
-            public TextView item1;
-            public TextView item2;
-        }
-
-        //       @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            SearchResults.ResultsAdapter.ViewHolder holder;
-            if (v == null) {
-                LayoutInflater vi =
-                        (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.list_item_2_line, null);
-                holder = new SearchResults.ResultsAdapter.ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.item_title);
-                holder.item2 = (TextView) v.findViewById(R.id.item_subtitle);
-                v.setTag(holder);
-            }
-            else
-                holder=(SearchResults.ResultsAdapter.ViewHolder)v.getTag();
-
-            final Job job = jobList.get(position);
-            if (job != null) {
-                holder.item1.setText(job.title);
-                String jobDate = ((JobAgent) getApplication()).getShortDate(job.date);
-                holder.item2.setText(jobDate + " ~ " + job.company + " ~ " + job.location);
-            }
-            return v;
-        }
-
-    }
-
     private void setListViewContent(String mSite) {
 
         final List<Job> jobs = new ArrayList<>();
@@ -177,10 +129,9 @@ public class SearchResults extends AppCompatActivity implements TabLayout.OnTabS
             }
         }
 
-        ResultsAdapter adapter = new ResultsAdapter(this,jobs);
-        listView = (ListView) findViewById(R.id.siteListing);
-        listView.setAdapter(adapter);
-
+        ListAdapter listAdapter = new ListAdapter<>(this, jobs);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new OnItemClickListener()
         {
             @Override
@@ -216,6 +167,7 @@ public class SearchResults extends AppCompatActivity implements TabLayout.OnTabS
             e.printStackTrace();
         }
         showProgress(true);
+        String SEARCH_API = "http://brisksoft.herokuapp.com/getjobs?location=<location>&kw=<kw>&v=1&country=<country>&max=50";
         String searchUrl = SEARCH_API.replace("<kw>",query).replace("<location>", location).replace("<country>", searchTerms[2]);
 
         StringRequest request = new StringRequest(Request.Method.GET, searchUrl, onJobsLoaded, onJobsError);

@@ -53,7 +53,7 @@ public class Tips extends BaseActivity {
         }
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        listAdapter = new ListAdapter(this, tips);
+        listAdapter = new ListAdapter<>(this, tips);
         listView.setAdapter(listAdapter);
 
         ConnectivityManager connMgr = (ConnectivityManager) 

@@ -39,7 +39,7 @@ public class Favorites extends BaseActivity {
 
         final List<Job> jobList = datasource.getAllJobs();
     	
-        listAdapter = new ListAdapter(this, jobList);
+        listAdapter = new ListAdapter<>(this, jobList);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
 
