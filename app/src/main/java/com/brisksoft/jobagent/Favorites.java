@@ -16,10 +16,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 
-
 public class Favorites extends BaseActivity {
     private JobsDataSource datasource;
-    private JobListAdapter listAdapter;
+    private ListAdapter listAdapter;
     private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
@@ -40,7 +39,7 @@ public class Favorites extends BaseActivity {
 
         final List<Job> jobList = datasource.getAllJobs();
     	
-        listAdapter = new JobListAdapter(this, jobList);
+        listAdapter = new ListAdapter(this, jobList);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(listAdapter);
 

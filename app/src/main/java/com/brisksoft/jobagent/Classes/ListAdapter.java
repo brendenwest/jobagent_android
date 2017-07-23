@@ -27,7 +27,8 @@ public class ListAdapter<T> extends ArrayAdapter {
     }
 
     public class ViewHolder{
-        public TextView item1;
+        public TextView title;
+        public TextView subtitle;
     }
 
     //        @Override
@@ -39,7 +40,8 @@ public class ListAdapter<T> extends ArrayAdapter {
                     (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.list_item, null);
             holder = new ViewHolder();
-            holder.item1 = (TextView) v.findViewById(R.id.item_title);
+            holder.title = (TextView) v.findViewById(R.id.item_title);
+            holder.subtitle = (TextView) v.findViewById(R.id.item_subtitle);
             v.setTag(holder);
         }
         else
@@ -49,15 +51,22 @@ public class ListAdapter<T> extends ArrayAdapter {
         switch (item.getClass().getSimpleName()) {
             case "Tip":
                 Tip tip = com.brisksoft.jobagent.Classes.Tip.class.cast(item);
-                holder.item1.setText(tip.getTitle());
+                holder.title.setText(tip.getTitle());
                 break;
             case "Company":
                 Company co = com.brisksoft.jobagent.Classes.Company.class.cast(item);
-                holder.item1.setText(co.getName());
+                holder.title.setText(co.getName());
                 break;
             case "Contact":
                 Contact person = com.brisksoft.jobagent.Classes.Contact.class.cast(item);
-                holder.item1.setText(person.getContact());
+                holder.title.setText(person.getContact());
+                break;
+            case "Job":
+                Job job = com.brisksoft.jobagent.Classes.Job.class.cast(item);
+                String company = (job.getCompany() != null) ? job.getCompany() + " | " : "";
+                holder.title.setText(job.getTitle());
+                holder.subtitle.setText(company + job.getDate());
+                holder.subtitle.setVisibility(View.VISIBLE);
                 break;
         }
 
