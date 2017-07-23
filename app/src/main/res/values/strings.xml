@@ -25,7 +25,8 @@
     <string name="btn_glassdoor">Glassdoor</string>
     <string name="btn_linkedin">LinkedIn</string>
     <string name="btn_connect">Connect</string>
-    
+
+    <string name="btn_add">Add</string>
     <string name="confirm_delete">Delete this item?</string>
     <string name="confirm_ok">OK</string>
     <string name="cancel">Cancel</string>

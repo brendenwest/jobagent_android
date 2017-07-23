@@ -7,11 +7,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
 	/** Called when the activity is first created. */
 
@@ -23,7 +25,6 @@ public class BaseActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // don't show full menu on 'detail' screens
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;

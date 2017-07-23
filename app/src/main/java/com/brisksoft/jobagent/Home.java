@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
@@ -53,10 +54,13 @@ public class Home extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         jobAgent = ((JobAgent) this.getApplication());
-		locationHelper = new LocationHelper(this);
         sharedPref = getPreferences(Context.MODE_PRIVATE);
 
         setContentView(R.layout.main);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+
+        locationHelper = new LocationHelper(this);
         txtLocation = (EditText) findViewById(R.id.txtLocation);
     	txtLocation.setOnFocusChangeListener(new OnFocusChangeListener() {          
             public void onFocusChange(View v, boolean hasFocus) {

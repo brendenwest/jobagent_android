@@ -1,86 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <TextView
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:state_selected="false"
-        android:text="@string/search_title"
-        android:textSize="10pt"
-        android:textStyle="normal"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:textAlignment="center" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/include"
+        app:layout_constraintRight_toRightOf="@+id/include"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
-    <EditText
-        android:id="@+id/txtQuery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="14"
-        android:hint="@string/hint_search"
-        android:lines="1"
-        android:maxLines="1"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/textView" />
-
-    <EditText
-        android:id="@+id/txtLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="14"
-        android:hint="@string/hint_location"
-        android:lines="1"
-        android:maxLines="1"
-        android:layout_below="@+id/txtQuery" />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="120dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center"
-        android:onClick="searchBtnClicked"
-        android:text="@string/btn_search"
-        android:layout_below="@+id/txtLocation" />
-       
-	    <TextView
-	        android:id="@+id/recentSearchesHeader"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="16dp"
-	        android:gravity="start"
-	        android:text="@string/recent_searches"
-	        android:textAppearance="?android:attr/textAppearanceMedium"
-	        android:textColor="#bbbbbb"
-	        android:textIsSelectable="false"
-	        android:textStyle="italic"
-            android:layout_below="@+id/searchBtn"/>
-
-    <ListView
-        android:id="@+id/searchesList"
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:layout_below="@+id/recentSearchesHeader">
-    </ListView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/searchBtn"
-        android:layout_alignStart="@+id/textView">
-
-        <LinearLayout
-            android:id="@+id/adLayout"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical" >
-        </LinearLayout>
+            android:state_selected="false"
+            android:text="@string/search_title"
+            android:textAlignment="center"
+            android:textSize="10pt"
+            android:textStyle="normal"
+            tools:layout_editor_absoluteX="18dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-    </RelativeLayout>
+        <EditText
+            android:id="@+id/txtQuery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:hint="@string/hint_search"
+            android:lines="1"
+            android:maxLines="1"
+            tools:layout_editor_absoluteX="8dp" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/txtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="14"
+            android:hint="@string/hint_location"
+            android:lines="1"
+            android:maxLines="1"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:onClick="searchBtnClicked"
+            android:text="@string/btn_search"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/recentSearchesHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingTop="20dp"
+            android:text="@string/recent_searches"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#bbbbbb"
+            android:textIsSelectable="false"
+            android:textStyle="italic"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <ListView
+            android:id="@+id/searchesList"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            tools:layout_editor_absoluteX="8dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/adLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical"></LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
