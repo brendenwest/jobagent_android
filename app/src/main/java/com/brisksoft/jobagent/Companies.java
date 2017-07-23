@@ -19,7 +19,7 @@ import android.os.Bundle;
 
 public class Companies extends ListActivity {
     private CompaniesDataSource datasource;
-    private CompanyListAdapter listAdapter;
+    private ListAdapter listAdapter;
     private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
@@ -42,7 +42,7 @@ public class Companies extends ListActivity {
         final List<Company> companyList = datasource.getAllCompanies();
     	
         // use the CustomAdapter to map elements to a ListView
-        listAdapter = new CompanyListAdapter(this, companyList);
+        listAdapter = new ListAdapter(this, companyList);
         setListAdapter(listAdapter);
 
         // set on-click event for list items
@@ -52,7 +52,7 @@ public class Companies extends ListActivity {
         public void onItemClick( AdapterView<?> arg0, View view, int position, long id)
             {
         		// pass selected job item to detail view
-                String[] aCompany = new String[] {String.valueOf(companyList.get(position).getId()),companyList.get(position).getCompany(), companyList.get(position).getDescription(),
+                String[] aCompany = new String[] {String.valueOf(companyList.get(position).getId()),companyList.get(position).getName(), companyList.get(position).getDescription(),
                 		companyList.get(position).getType()};
         		// pass selected company item to detail view
         		Intent intentDetail = new Intent(getApplicationContext(), CompanyDetail.class);

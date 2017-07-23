@@ -37,7 +37,7 @@ public class CompaniesDataSource {
 
     public Company createCompany(Company company) {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelper.COLUMN_COMPANY, company.getCompany());
+        values.put(SQLiteHelper.COLUMN_COMPANY, company.getName());
         values.put(SQLiteHelper.COLUMN_DESCRIPTION, company.getDescription());
         values.put(SQLiteHelper.COLUMN_TYPE, company.getType());
         long insertId = database.insert(SQLiteHelper.TABLE_COMPANIES, null,
@@ -59,7 +59,7 @@ public class CompaniesDataSource {
 
     public void updateCompany(Company company) {
         ContentValues values = new ContentValues();
-        values.put(SQLiteHelper.COLUMN_COMPANY, company.getCompany());
+        values.put(SQLiteHelper.COLUMN_COMPANY, company.getName());
         values.put(SQLiteHelper.COLUMN_DESCRIPTION, company.getDescription());
         values.put(SQLiteHelper.COLUMN_TYPE, company.getType());
         
@@ -87,7 +87,7 @@ public class CompaniesDataSource {
     private Company cursorToCompany(Cursor cursor) {
     	Company Company = new Company();
         Company.setId(cursor.getLong(0));
-    	Company.setCompany(cursor.getString(1));
+    	Company.setName(cursor.getString(1));
     	Company.setDescription(cursor.getString(2));
     	Company.setType(cursor.getString(3));
         return Company;

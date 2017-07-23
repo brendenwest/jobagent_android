@@ -95,16 +95,11 @@ public class CompanyDetail extends BaseActivity {
     // package item detail for saving
     void saveEdits() {
     	String itemTitle = txtCompany.getText().toString();
-    	if (itemTitle != null && !itemTitle.isEmpty()) {
-	        Company newCompany = new Company();
-	        newCompany.setCompany(itemTitle);
-	        newCompany.setDescription(txtDescription.getText().toString());
-
+        if (!itemTitle.isEmpty()) {
 	        RadioGroup groupType =(RadioGroup)findViewById(R.id.type);
 	        RadioButton selectedBtn = (RadioButton) findViewById(groupType.getCheckedRadioButtonId());
-	        newCompany.setType(selectedBtn.getText().toString());
-	        	        
-	        
+            Company newCompany = new Company(itemTitle, txtDescription.getText().toString(), selectedBtn.getText().toString());
+
 	        if (company[0] != null && !company[0].isEmpty()) { // existing Contacts already have an ID
 	            newCompany.setId(Long.valueOf(company[0]));
 	            // save  existing Company to the database

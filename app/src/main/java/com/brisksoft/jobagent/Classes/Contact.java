@@ -13,14 +13,10 @@ public class Contact {
 	        super();
 	    }
 	    
-	    public Contact(int id, String contact, String company, String title, String phone, String email) {
+	    public Contact(String contact, String company) {
 	        super();
-	        this.id = id;
 	        this.contact = contact;
 		    this.company = company;
-            this.title = title;
-	        this.phone = phone;
-            this.email = email;
 	    }
 
         public long getId() {

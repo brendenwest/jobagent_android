@@ -2,19 +2,17 @@ package com.brisksoft.jobagent.Classes;
 
 public class Company {
 		private long id;
-	    private String company;
+	    private String name;
 	    private String description;
 	    private String type;
 
-	    
 	    public Company(){
 	        super();
 	    }
 	    
-	    public Company(int id, String company, String description, String type) {
+	    public Company(String name, String description, String type) {
 	        super();
-	        this.id = id;
-	        this.company = company;
+	        this.name = name;
             this.description = description;
 	        this.type = type;
 	    }
@@ -33,11 +31,11 @@ public class Company {
             this.description = description;
         }
 
-        public String getCompany() {
-            return company;
+        public String getName() {
+            return name;
         }
-        public void setCompany(String company) {
-            this.company = company;
+        public void setName(String name) {
+            this.name = name;
         }
 
         public String getType() {
@@ -49,6 +47,6 @@ public class Company {
 
     @Override
 	    public String toString() {
-	        return this.id + ", " + this.company + ", " + this.description + ", " + this.type;
+	        return this.id + ", " + this.name + ", " + this.description + ", " + this.type;
 	    }
 }

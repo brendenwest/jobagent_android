@@ -9,7 +9,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.brisksoft.jobagent.Classes.ActivityHelper;
-
+import com.brisksoft.jobagent.Classes.ListAdapter;
+import com.brisksoft.jobagent.Classes.Tip;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
@@ -19,15 +20,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import org.json.JSONArray;
@@ -38,7 +35,7 @@ public class Tips extends ListActivity {
 
     ListView listView;
     ListAdapter listAdapter;
-	private List<String[]> tips = new ArrayList<String[]>();
+	private List<Tip> tips = new ArrayList<Tip>();
 	private static final String tipsUrl = "http://brisksoft.us/jobagent/tips2.json";
 	private final ActivityHelper helper = new ActivityHelper(this);
 
@@ -79,11 +76,11 @@ public class Tips extends ListActivity {
                 {
             		// pass selected task item to detail view
                 Log.d(TAG, "tip " + position);
-                if (tips.get(position)[2] != null && !tips.get(position)[2].isEmpty()) {
-                    // link to web page
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position)[2]));
-                    startActivity(browserIntent);
-                }
+//                if (tips.get(position)[2] != null && !tips.get(position)[2].isEmpty()) {
+//                    // link to web page
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position)[2]));
+//                    startActivity(browserIntent);
+//                }
 
                 }
             } );
@@ -97,19 +94,18 @@ public class Tips extends ListActivity {
          JsonArrayRequest jsonReq = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
              @Override
              public void onResponse(JSONArray response) {
-Log.d("JSON","loaded " + response.length());
-                 try {
-                     for(int i = 0; i < response.length(); i++){
-                         String[] item = new String[3];
-                         item[0] = response.getJSONObject(i).getString("title");
-                         item[1] = response.getJSONObject(i).getString("description");
-                         item[2] = response.getJSONObject(i).getString("link");
-                         tips.add(item);
-                     }
-                     // trigger refresh of recycler view
-                     listAdapter.notifyDataSetChanged();
-                 } catch (JSONException e) {
+             try {
+                 for(int i = 0; i < response.length(); i++){
+                     Tip tip = new Tip();
+                     tip.setTitle(response.getJSONObject(i).getString("title"));
+                     tip.setDescription(response.getJSONObject(i).getString("description"));
+                     tip.setLink(response.getJSONObject(i).getString("link"));
+                     tips.add(tip);
                  }
+                 // trigger refresh of recycler view
+                 listAdapter.notifyDataSetChanged();
+             } catch (JSONException e) {
+             }
              }
          }, new Response.ErrorListener() {
              @Override
@@ -132,37 +128,6 @@ Log.d("JSON","loaded " + response.length());
 		  return helper.onOptionsItemSelected(item);
 	}
 
-    private class ListAdapter extends ArrayAdapter<String[]> {
-        private final List<String[]> tips;
-        private final Context context;
-
-        private ListAdapter(Context context, List<String[]> tips) {
-            super(context,0, tips);
-            this.context = context;
-            this.tips = tips;
-        }
-
-        private class ViewHolder{
-            private TextView item1;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            if (convertView == null) {
-                LayoutInflater vi =
-                        (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
-            }
-
-            TextView title = (TextView) convertView.findViewById(R.id.item_title);
-            final String[] tip = tips.get(position);
-            if (tip != null) {
-                title.setText(tip[0]);
-            }
-            return convertView;
-        }
-    }
 
 }
 

@@ -1,6 +1,7 @@
 package com.brisksoft.jobagent.Classes;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +10,20 @@ import android.widget.TextView;
 
 import com.brisksoft.jobagent.R;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by usexbrwe on 12/14/13.
  */
 
-public class CompanyListAdapter extends ArrayAdapter {
-    private final List<Company> companyList;
+public class ListAdapter<T> extends ArrayAdapter {
+    private final List<T> list;
     private final Context context;
 
-    public CompanyListAdapter(Context context, List<Company> companyList) {
-        super(context, R.layout.list_item, companyList);
+    public ListAdapter(Context context, List<T> list) {
+        super(context, R.layout.list_item, list);
         this.context = context;
-        this.companyList = companyList;
+        this.list = list;
     }
 
     public class ViewHolder{
@@ -43,10 +45,22 @@ public class CompanyListAdapter extends ArrayAdapter {
         else
             holder=(ViewHolder)v.getTag();
 
-        final Company company = companyList.get(position);
-        if (company != null) {
-            holder.item1.setText(company.getCompany());
+        T item = list.get(position);
+        switch (item.getClass().getSimpleName()) {
+            case "Tip":
+                Tip tip = com.brisksoft.jobagent.Classes.Tip.class.cast(item);
+                holder.item1.setText(tip.getTitle());
+                break;
+            case "Company":
+                Company co = com.brisksoft.jobagent.Classes.Company.class.cast(item);
+                holder.item1.setText(co.getName());
+                break;
+            case "Contact":
+                Contact person = com.brisksoft.jobagent.Classes.Contact.class.cast(item);
+                holder.item1.setText(person.getContact());
+                break;
         }
+
         return v;
     }
 

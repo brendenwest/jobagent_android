@@ -79,16 +79,14 @@ public class ContactDetail extends BaseActivity {
 
     // package item detail for saving
     void saveEdits() {
-    	String itemTitle = txtContact.getText().toString();
-    	if (itemTitle != null && !itemTitle.isEmpty()) {
-	        Contact newContact = new Contact();
+    	String name = txtContact.getText().toString();
+    	if (!name.isEmpty()) {
+	        Contact newContact = new Contact(name, txtCompany.getText().toString());
 	        newContact.setTitle(txtTitle.getText().toString());
-	        newContact.setCompany(txtCompany.getText().toString());
-	        newContact.setContact(txtContact.getText().toString()); 
+	        newContact.setContact(txtContact.getText().toString());
 	        newContact.setPhone(txtPhone.getText().toString());
 	        newContact.setEmail(txtEmail.getText().toString());
-	        	        
-	        
+
 	        if (contact[0] != null && !contact[0].isEmpty()) { // existing Contacts already have an ID
 	            newContact.setId(Long.valueOf(contact[0]));
 	            // save the new Contact to the database
@@ -101,7 +99,7 @@ public class ContactDetail extends BaseActivity {
 	        // notify user that job was saved
 	        Toast.makeText(getApplicationContext(), "Saving...", Toast.LENGTH_SHORT).show();
 	        // Log pageview w/ Google Analytics
-	        ((JobAgent) this.getApplication()).trackPVFull("Contact details", "save contact", itemTitle,"");
+	        ((JobAgent) this.getApplication()).trackPVFull("Contact details", "save contact", name,"");
 
     	}
     }

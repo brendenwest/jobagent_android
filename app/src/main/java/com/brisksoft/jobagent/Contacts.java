@@ -24,7 +24,7 @@ import android.os.Bundle;
 
 public class Contacts extends ListActivity {
     private ContactsDataSource datasource;
-    private ContactListAdapter listAdapter;
+    private ListAdapter listAdapter;
     private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
@@ -46,8 +46,7 @@ public class Contacts extends ListActivity {
 
         final List<Contact> contactList = datasource.getAllContacts();
     	
-        // use the CustomAdapter to map elements to a ListView
-        listAdapter = new ContactListAdapter(this, contactList);
+        listAdapter = new ListAdapter(this, contactList);
         setListAdapter(listAdapter);
 
         // set on-click event for list items
@@ -112,57 +111,6 @@ public class Contacts extends ListActivity {
          startActivity(intentDetail);
 
      }
-
-    public class ContactListAdapter extends ArrayAdapter {
-        private final List<Contact> contactList;
-        private final Context context;
-
-        public ContactListAdapter(Context context, List<Contact> contactList) {
-            super(context, R.layout.list_item_2_line, contactList);
-            this.context = context;
-            this.contactList = contactList;
-        }
-
-        public class ViewHolder{
-            public TextView item1;
-            public TextView item2;
-        }
-
-        //        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            ViewHolder holder;
-            if (v == null) {
-                LayoutInflater vi =
-                        (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = vi.inflate(R.layout.list_item_2_line, null);
-                holder = new ViewHolder();
-                holder.item1 = (TextView) v.findViewById(R.id.item_title);
-                holder.item2 = (TextView) v.findViewById(R.id.item_subtitle);
-                v.setTag(holder);
-            }
-            else
-                holder=(ViewHolder)v.getTag();
-
-            final Contact contact = contactList.get(position);
-            if (contact != null) {
-            	Log.d("contact", "contact = " + contact.getContact());
-            	String title = contact.getTitle();
-            	String company = contact.getCompany();
-            	
-                String spacer = (title != null && company != null && !title.isEmpty() && !company.isEmpty()) ? ", " : "";
-                String line2 = (title != null && !title.isEmpty()) ? title : "";
-                if (company != null) { // company field comes from different table, so check for null value
-                	line2 += spacer + company;
-                }
-                		
-                holder.item1.setText(contact.getContact());
-                holder.item2.setText(line2);
-            }
-            return v;
-        }
-
-    }
 
     @Override
     protected void onResume() {
