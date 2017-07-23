@@ -19,6 +19,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,12 +31,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class Tips extends ListActivity {
+public class Tips extends BaseActivity {
     /** Called when the activity is first created. */
 
-    ListView listView;
-    ListAdapter listAdapter;
-	private List<Tip> tips = new ArrayList<Tip>();
+	List<Tip> tips = new ArrayList<Tip>();
+    private ListAdapter listAdapter;
 	private static final String tipsUrl = "http://brisksoft.us/jobagent/tips2.json";
 	private final ActivityHelper helper = new ActivityHelper(this);
 
@@ -46,14 +46,13 @@ public class Tips extends ListActivity {
         
         final String TAG = getString(R.string.tips_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        listView = (ListView) findViewById(android.R.id.list);
+        ListView listView = (ListView) findViewById(R.id.listView);
         listAdapter = new ListAdapter(this, tips);
         listView.setAdapter(listAdapter);
 
@@ -76,11 +75,11 @@ public class Tips extends ListActivity {
                 {
             		// pass selected task item to detail view
                 Log.d(TAG, "tip " + position);
-//                if (tips.get(position)[2] != null && !tips.get(position)[2].isEmpty()) {
-//                    // link to web page
-//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position)[2]));
-//                    startActivity(browserIntent);
-//                }
+                if (tips.get(position).getLink() != null) {
+                    // link to web page
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(tips.get(position).getLink()));
+                    startActivity(browserIntent);
+                }
 
                 }
             } );

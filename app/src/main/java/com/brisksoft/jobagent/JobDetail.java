@@ -14,6 +14,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -59,12 +60,12 @@ public class JobDetail extends BaseActivity implements OnItemSelectedListener {
 
         TAG = getString(R.string.details_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        
         // job ID is at 0 index, but not shown in UI
         
         job = getIntent().getStringArrayExtra("JOB");

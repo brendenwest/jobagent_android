@@ -4,25 +4,18 @@ import com.brisksoft.jobagent.Classes.*;
 
 import java.util.List;
 
-import android.app.ListActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class Contacts extends ListActivity {
+public class Contacts extends BaseActivity {
     private ContactsDataSource datasource;
     private ListAdapter listAdapter;
     private final ActivityHelper helper = new ActivityHelper(this);
@@ -34,24 +27,23 @@ public class Contacts extends ListActivity {
 
         String TAG = getString(R.string.contacts_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         datasource = new ContactsDataSource(this);
         datasource.open();
 
         final List<Contact> contactList = datasource.getAllContacts();
-    	
+
         listAdapter = new ListAdapter(this, contactList);
-        setListAdapter(listAdapter);
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(listAdapter);
 
         // set on-click event for list items
-    	ListView list = getListView();
-    	list.setOnItemClickListener(new OnItemClickListener()
+    	listView.setOnItemClickListener(new OnItemClickListener()
         {
         public void onItemClick( AdapterView<?> arg0, View view, int position, long id)
             {

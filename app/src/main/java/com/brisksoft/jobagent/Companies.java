@@ -4,7 +4,7 @@ import com.brisksoft.jobagent.Classes.*;
 
 import java.util.List;
 
-import android.app.ListActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,11 +13,10 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class Companies extends ListActivity {
+public class Companies extends BaseActivity {
     private CompaniesDataSource datasource;
     private ListAdapter listAdapter;
     private final ActivityHelper helper = new ActivityHelper(this);
@@ -29,11 +28,10 @@ public class Companies extends ListActivity {
 
         String TAG = getString(R.string.companies_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         datasource = new CompaniesDataSource(this);
@@ -42,12 +40,12 @@ public class Companies extends ListActivity {
         final List<Company> companyList = datasource.getAllCompanies();
     	
         // use the CustomAdapter to map elements to a ListView
+        ListView listView = (ListView) findViewById(R.id.listView);
         listAdapter = new ListAdapter(this, companyList);
-        setListAdapter(listAdapter);
+        listView.setAdapter(listAdapter);
 
         // set on-click event for list items
-    	ListView companies = getListView();
-    	companies.setOnItemClickListener(new OnItemClickListener()
+        listView.setOnItemClickListener(new OnItemClickListener()
         {
         public void onItemClick( AdapterView<?> arg0, View view, int position, long id)
             {
