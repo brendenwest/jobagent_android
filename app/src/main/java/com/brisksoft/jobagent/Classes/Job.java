@@ -2,6 +2,8 @@ package com.brisksoft.jobagent.Classes;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class Job {
 		private long id;
     public String title;
@@ -85,7 +87,8 @@ public class Job {
         }
 
         public String getDate() {
-            return date;
+            Date tmpDate = DateUtils.dateFromLongString(date);
+            return DateUtils.getShortDate(tmpDate);
         }
         public void setDate(String date) {
             this.date = date;

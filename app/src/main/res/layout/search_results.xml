@@ -5,10 +5,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
     <TextView
         android:id="@+id/txtSearchMsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/include"
         android:hint="@id/txtSearchMsg"
         android:layout_margin="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"

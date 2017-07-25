@@ -93,10 +93,7 @@ public class JobDetail extends BaseActivity implements OnItemSelectedListener {
         if (job[7] != null && !job[7].isEmpty()) {
         	txtDate.setText(job[7]);
         } else {
- 	       Calendar c = Calendar.getInstance();
- 	       Date date = new Date();			  
- 	       c.setTime(date);
- 	       String shortDate = c.get(Calendar.MONTH)+1 + "-" + c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.YEAR);
+ 	       String shortDate = DateUtils.getShortDate(new Date());
  	       txtDate.setText(shortDate);
         }
         

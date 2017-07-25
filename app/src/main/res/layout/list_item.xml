@@ -17,9 +17,9 @@
         android:id="@+id/item_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_marginStart="6dp"
         android:layout_weight="0"
-        android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+        android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+        android:visibility="gone" />
 
 </LinearLayout>

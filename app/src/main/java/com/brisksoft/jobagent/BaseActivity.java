@@ -30,6 +30,11 @@ public class BaseActivity extends AppCompatActivity {
             case "Home":
                 inflater.inflate(R.menu.menu_main, menu);
                 break;
+            case "SearchResults":
+                inflater.inflate(R.menu.menu_base, menu);
+                MenuItem addItem = menu.getItem(0);
+                addItem.setVisible(false);
+                break;
             default:
                 inflater.inflate(R.menu.menu_base, menu);
                 break;
