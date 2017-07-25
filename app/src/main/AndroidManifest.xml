@@ -66,8 +66,6 @@
             android:name=".Cities"
             android:label="Locations"
             android:parentActivityName=".Home" />
-		<activity
-            android:name="com.brisksoft.jobagent$Classes.ActivityHelper" />
         <activity
             android:name=".JobDetail"
             android:label="Job Details"

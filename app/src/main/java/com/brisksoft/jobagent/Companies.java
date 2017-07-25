@@ -6,8 +6,6 @@ import java.util.List;
 
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.AdapterView;
@@ -19,7 +17,6 @@ import android.os.Bundle;
 public class Companies extends BaseActivity {
     private CompaniesDataSource datasource;
     private ListAdapter listAdapter;
-    private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,15 +60,6 @@ public class Companies extends BaseActivity {
     	((JobAgent) this.getApplication()).trackPV(TAG);
 
     }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        MenuItem addItem = menu.getItem(0);
-        addItem.setVisible(true).setTitle("Add Company");
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -80,7 +68,7 @@ public class Companies extends BaseActivity {
                 loadItemDetail(null);
                 return true;
             default:
-                return helper.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
         }
     }
 

@@ -1,17 +1,14 @@
 package com.brisksoft.jobagent;
 
-import com.brisksoft.jobagent.Classes.ActivityHelper;
 import com.brisksoft.jobagent.Classes.CompaniesDataSource;
 import com.brisksoft.jobagent.Classes.Company;
 import com.brisksoft.jobagent.Classes.DialogCallback;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -22,7 +19,6 @@ import android.widget.Toast;
 public class CompanyDetail extends BaseActivity {
     /** Called when the activity is first created. */
 
-	private final ActivityHelper helper = new ActivityHelper(this);
     private String[] company;
     private CompaniesDataSource datasource;
 
@@ -36,10 +32,11 @@ public class CompanyDetail extends BaseActivity {
 
         String TAG = getString(R.string.details_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // company ID is at 0 index, but not shown in UI
         
@@ -80,17 +77,6 @@ public class CompanyDetail extends BaseActivity {
         // Log pageview w/ Google Analytics
         ((JobAgent) this.getApplication()).trackPVFull("Company details", "company", company[1],"");
      }
-
-    @Override
-    /* disable options menu on detail screen */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		  return helper.onOptionsItemSelected(item);
-	}
 
     // package item detail for saving
     void saveEdits() {

@@ -8,11 +8,11 @@ import java.util.Locale;
 
 import com.brisksoft.jobagent.Classes.*;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -28,7 +28,6 @@ import android.widget.Toast;
 public class TaskDetail extends BaseActivity {
     /** Called when the activity is first created. */
 
-	private final ActivityHelper helper = new ActivityHelper(this);
     private String[] task;
     private TasksDataSource datasource;
     private String TAG;
@@ -48,11 +47,10 @@ public class TaskDetail extends BaseActivity {
 
         TAG = getString(R.string.details_title);
 
-        // configure action bar
-        ActionBar actionBar = getActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(TAG);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         // task ID is at 0 index, but not shown in UI
@@ -97,17 +95,6 @@ public class TaskDetail extends BaseActivity {
         // Log pageview w/ Google Analytics
         ((JobAgent) this.getApplication()).trackPVFull("Task details", "load task", task[1],"");
      }
-
-    @Override
-    /* disable options menu on detail screen */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		  return helper.onOptionsItemSelected(item);
-	}
 
 	// set radio button
     // set job type radio button

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
+    <!--placeholder item for 'add' option on list screens-->
+    <item android:id="@+id/navAdd" android:title="@string/btn_add" app:showAsAction="always" android:visible="true"/>
+    <item android:id="@+id/navSave" android:title="@string/btn_save" app:showAsAction="always" android:visible="false"/>
+</menu>

@@ -8,11 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.brisksoft.jobagent.Classes.ActivityHelper;
 import com.brisksoft.jobagent.Classes.ListAdapter;
 import com.brisksoft.jobagent.Classes.Tip;
-import android.app.ActionBar;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -37,7 +34,6 @@ public class Tips extends BaseActivity {
 	List<Tip> tips = new ArrayList<Tip>();
     private ListAdapter listAdapter;
 	private static final String tipsUrl = "http://brisksoft.us/jobagent/tips2.json";
-	private final ActivityHelper helper = new ActivityHelper(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,16 +112,6 @@ public class Tips extends BaseActivity {
          // Add the request to the RequestQueue.
          queue.add(jsonReq);
      }
-
-    @Override
-	 public boolean onCreateOptionsMenu(Menu menu) {
-	  return helper.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		  return helper.onOptionsItemSelected(item);
-	}
 
 
 }

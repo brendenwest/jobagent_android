@@ -7,7 +7,6 @@ import java.util.Date;
 
 import com.brisksoft.jobagent.Classes.*;
 
-import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -17,8 +16,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -33,7 +30,6 @@ import android.widget.Toast;
 public class JobDetail extends BaseActivity implements OnItemSelectedListener {
     /** Called when the activity is first created. */
 
-	private final ActivityHelper helper = new ActivityHelper(this);
     private String[] job;
     private JobsDataSource datasource;
     private String TAG;
@@ -155,17 +151,6 @@ public class JobDetail extends BaseActivity implements OnItemSelectedListener {
                 break;
             }
         }
-
-    @Override
-    /* disable options menu on detail screen */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-	@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-		  return helper.onOptionsItemSelected(item);
-	}
 
     // package item detail for saving
     void saveEdits(boolean btnClicked) {

@@ -26,13 +26,24 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        switch (this.getLocalClassName()) {
+            case "Home":
+                inflater.inflate(R.menu.menu_main, menu);
+                break;
+            default:
+                inflater.inflate(R.menu.menu_base, menu);
+                break;
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
             case R.id.navFavorites:
                 startActivity(new Intent(this, Favorites.class));
                 return true;

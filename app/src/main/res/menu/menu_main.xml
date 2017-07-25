@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
     <!--placeholder item for 'add' option on list screens-->
-    <item android:id="@+id/navAdd" android:title="@string/btn_add" app:showAsAction="never" android:visible="false"/>
     <item android:id="@+id/navFavorites" android:title="@string/favorites_title" app:showAsAction="ifRoom" />
     <item android:id="@+id/navCompanies" android:title="@string/companies_title" app:showAsAction="never"/>
     <item android:id="@+id/navContacts" android:title="@string/contacts_title" app:showAsAction="never" />
