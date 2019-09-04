@@ -10,6 +10,7 @@ import-summary.txt
 # ignore following directories
 build/
 gradle/
+gradlew*
 .gradle/
 .idea/
 /local.properties
